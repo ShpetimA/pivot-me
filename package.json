@@ -17,6 +17,7 @@
     "jest-transform-stub": "^2.0.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-router": "^7.10.1",
     "ts-jest": "^29.4.6"
   },
   "devDependencies": {
