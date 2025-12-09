@@ -5,8 +5,10 @@ import {
   type FieldErrors,
 } from "react-hook-form";
 import { Select } from "~/components/Select/select";
-import { GROUPABLE_DIMENSIONS, type TForm } from "./GeneratePivotForm";
 import Styles from "./ColumnDimension.module.css";
+import Button from "~/components/Button/button";
+import { GROUPABLE_DIMENSIONS } from "~/constants/group-fields";
+import type { TForm } from "~/lib/schemas/generate-pivot";
 
 type ColumnDimensionsFieldProps = {
   errors: FieldErrors<TForm>;
@@ -45,20 +47,25 @@ const ColumnDimensionsField = ({ errors }: ColumnDimensionsFieldProps) => {
               placeholder="Select dimension"
               error={errors.columnDimensions?.[index]?.message}
             />
-            <button type="button" onClick={() => remove(index)}>
+            <Button
+              variant="secondary"
+              type="button"
+              onClick={() => remove(index)}
+            >
               ×
-            </button>
+            </Button>
           </div>
         ))}
       </div>
-      <button
+      <Button
+        variant="secondary"
         type="button"
         disabled={!hasAvailableOptions}
         className={Styles.addDimensionButton}
         onClick={() => append("")}
       >
         + Add Dimension
-      </button>
+      </Button>
       {errors.columnDimensions && <p>{errors.columnDimensions.message}</p>}
     </div>
   );

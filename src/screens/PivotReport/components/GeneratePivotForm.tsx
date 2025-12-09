@@ -1,28 +1,11 @@
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import z from "zod";
 import { Select } from "~/components/Select/select";
 import ColumnDimensionsField from "./ColumnDimensionsField";
 import Styles from "./GeneratePivotForm.module.css";
-
-const schema = z.object({
-  rowDimension: z.union([
-    z.literal("year"),
-    z.literal("transaction_type"),
-    z.literal("status"),
-  ]),
-  columnDimensions: z
-    .array(
-      z.union([
-        z.literal("year"),
-        z.literal("transaction_type"),
-        z.literal("status"),
-      ])
-    )
-    .min(1, "Select at least one column dimension"),
-});
-
-export type TForm = z.infer<typeof schema>;
+import Button from "~/components/Button/button";
+import { schema, type TForm } from "~/lib/schemas/generate-pivot";
+import type { GroupableDimensions } from "~/constants/group-fields";
 
 const ROW_DIMENSION_OPTIONS: {
   value: GroupableDimensions;
@@ -32,18 +15,18 @@ const ROW_DIMENSION_OPTIONS: {
   { value: "transaction_type", label: "transaction_type" },
   { value: "status", label: "status" },
 ];
-export const GROUPABLE_DIMENSIONS = [
-  "transaction_type",
-  "status",
-  "year",
-] as const;
-type GroupableDimensions = (typeof GROUPABLE_DIMENSIONS)[number];
 
 type GeneratePivotProps = {
   onGenerate: (data: TForm) => void;
+  onClose?: () => void;
+  dialogProps: React.ComponentProps<"dialog">;
 };
 
-const GeneratePivotForm = ({ onGenerate }: GeneratePivotProps) => {
+const GeneratePivotForm = ({
+  onGenerate,
+  onClose,
+  dialogProps,
+}: GeneratePivotProps) => {
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -55,16 +38,21 @@ const GeneratePivotForm = ({ onGenerate }: GeneratePivotProps) => {
   const handleSubmit = form.handleSubmit(onGenerate);
 
   return (
-    <div>
-      <h1>Generate Pivot Form</h1>
+    <dialog className={Styles.pivotFormDialog} {...dialogProps}>
+      <div className={Styles.dialogHeader}>
+        <h1>Generate Pivot Form</h1>
+        <Button variant="secondary" type="button" onClick={onClose}>
+          X
+        </Button>
+      </div>
       <FormProvider {...form}>
         <form className={Styles.form} onSubmit={handleSubmit}>
           <RowDimensionField />
           <ColumnDimensionsField errors={form.formState.errors} />
-          <button type="submit">Generate Pivot</button>
+          <Button type="submit">Generate Pivot</Button>
         </form>
       </FormProvider>
-    </div>
+    </dialog>
   );
 };
 

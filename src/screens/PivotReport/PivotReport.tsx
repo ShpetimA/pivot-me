@@ -2,20 +2,21 @@ import { useQuery } from "@tanstack/react-query";
 import { transactions } from "~/constants/data";
 import { generatePivot, type PivotData } from "~/lib/pivot";
 import { useRef, useState } from "react";
-import GeneratePivotForm, {
-  type TForm,
-} from "~/screens/PivotReport/components/GeneratePivotForm";
+import GeneratePivotForm from "~/screens/PivotReport/components/GeneratePivotForm";
 import PivotTable from "~/components/PivotTable/PivotTable";
 import type { Transaction } from "~/types/transaction";
 import { TransactionTable } from "~/components/TransactionTable/TransactionTable";
 import Styles from "./PivotReport.module.css";
+import Button from "~/components/Button/button";
+import type { TForm } from "~/lib/schemas/generate-pivot";
+import LoadingFullScreen from "~/components/Loading/loading";
 
 const PivotReport = () => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const { data, isLoading } = useQuery({
     queryKey: ["transactions"],
     queryFn: async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 400));
       return transactions;
     },
   });
@@ -33,23 +34,50 @@ const PivotReport = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingFullScreen />;
   }
 
   return (
     <div className={Styles.screenContainer}>
-      <button type="button" onClick={() => dialogRef.current?.showModal()}>
-        Gen
-      </button>
-      {pivotData && (
-        <button type="button" onClick={() => setPivotData(null)}>
-          Clear Pivot
-        </button>
-      )}
-      <dialog ref={dialogRef} className={Styles.pivotFormDialog}>
-        <GeneratePivotForm onGenerate={handleGeneratePivot} />
-      </dialog>
-      <Table pivotData={pivotData} transactions={transactions} />
+      <header className={Styles.header}>
+        <div className={Styles.headerContent}>
+          <h1 className={Styles.title}>Pivot Report</h1>
+          <p className={Styles.subtitle}>
+            {pivotData
+              ? "Viewing aggregated data. Clear to see raw transactions."
+              : "Group and summarize your transactions by any dimension."}
+          </p>
+        </div>
+        <div className={Styles.actions}>
+          <Button
+            type="button"
+            variant="primary"
+            onClick={() => dialogRef.current?.showModal()}
+          >
+            {pivotData ? "Edit Pivot" : "Create Pivot"}
+          </Button>
+          {pivotData && (
+            <Button
+              variant="secondary"
+              type="button"
+              className={Styles.secondaryBtn}
+              onClick={() => setPivotData(null)}
+            >
+              Clear
+            </Button>
+          )}
+        </div>
+      </header>
+      <GeneratePivotForm
+        dialogProps={{
+          ref: dialogRef,
+        }}
+        onClose={() => dialogRef.current?.close()}
+        onGenerate={handleGeneratePivot}
+      />
+      <main className={Styles.content}>
+        <Table pivotData={pivotData} transactions={transactions} />
+      </main>
     </div>
   );
 };
