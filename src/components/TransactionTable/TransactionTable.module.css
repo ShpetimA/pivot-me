@@ -39,3 +39,10 @@
     padding-inline: 8px;
     text-align: left;
 }
+
+.noData {
+    padding: 16px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 1rem;
+}

@@ -44,7 +44,7 @@ const PivotReport = () => {
           <h1 className={Styles.title}>Pivot Report</h1>
           <p className={Styles.subtitle}>
             {pivotData
-              ? "Viewing aggregated data. Clear to see raw transactions."
+              ? "Sum of your transactions grouped by selected dimensions."
               : "Group and summarize your transactions by any dimension."}
           </p>
         </div>
@@ -91,7 +91,7 @@ type TableProps = {
 
 const Table = ({ pivotData, transactions }: TableProps) => {
   if (!pivotData) {
-    return <TransactionTable data={transactions}></TransactionTable>;
+    return <TransactionTable data={transactions} />;
   }
 
   return <PivotTable pivotData={pivotData} />;

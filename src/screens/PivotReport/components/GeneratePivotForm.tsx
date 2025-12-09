@@ -5,16 +5,12 @@ import ColumnDimensionsField from "./ColumnDimensionsField";
 import Styles from "./GeneratePivotForm.module.css";
 import Button from "~/components/Button/button";
 import { schema, type TForm } from "~/lib/schemas/generate-pivot";
-import type { GroupableDimensions } from "~/constants/group-fields";
+import { GROUPABLE_DIMENSIONS } from "~/constants/group-fields";
 
-const ROW_DIMENSION_OPTIONS: {
-  value: GroupableDimensions;
-  label: string;
-}[] = [
-  { value: "year", label: "year" },
-  { value: "transaction_type", label: "transaction_type" },
-  { value: "status", label: "status" },
-];
+const ROW_DIMENSION_OPTIONS = GROUPABLE_DIMENSIONS.map((dim) => ({
+  value: dim,
+  label: dim,
+}));
 
 type GeneratePivotProps = {
   onGenerate: (data: TForm) => void;

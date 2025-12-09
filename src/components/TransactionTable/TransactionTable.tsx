@@ -6,7 +6,11 @@ interface TransactionTableProps {
 }
 
 export function TransactionTable({ data }: TransactionTableProps) {
-  const columns = data.length > 0 ? Object.keys(data[0]) : [];
+  if (!data || data.length === 0) {
+    return <div className={styles.noData}>No transactions available.</div>;
+  }
+
+  const columns = Object.keys(data[0]);
 
   return (
     <div className={styles.tableContainer}>

@@ -31,7 +31,7 @@ export const Select = ({
           {label}
         </label>
       )}
-      <select ref={ref} className={[styles.select].join(" ")} {...props}>
+      <select ref={ref} className={[styles.select, className].filter(Boolean).join(" ")} {...props}>
         {placeholder && <option value="">{placeholder}</option>}
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>

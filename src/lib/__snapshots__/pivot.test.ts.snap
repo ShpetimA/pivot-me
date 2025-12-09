@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`groupByColAndRow with real transaction data matches snapshot for real transaction data 1`] = `
+{
+  "colPaths": [
+    "paid|bill",
+    "paid|invoice",
+    "partially_paid|bill",
+    "partially_paid|direct_expense",
+    "partially_paid|invoice",
+    "unpaid|bill",
+    "unpaid|direct_expense",
+    "unpaid|invoice",
+  ],
+  "data": {
+    "2023": {
+      "paid|bill": -250.79,
+      "paid|invoice": 14.5,
+      "partially_paid|bill": 130,
+      "partially_paid|direct_expense": 251,
+      "unpaid|bill": 740,
+    },
+    "2024": {
+      "paid|bill": 320,
+      "partially_paid|direct_expense": 20.5,
+      "partially_paid|invoice": 1330,
+      "unpaid|bill": 340,
+      "unpaid|invoice": 1146.9,
+    },
+    "2025": {
+      "paid|bill": 120,
+      "paid|invoice": 830,
+      "partially_paid|bill": 210,
+      "partially_paid|direct_expense": 26.55,
+      "unpaid|bill": 230.5,
+      "unpaid|direct_expense": 230.1,
+    },
+  },
+  "rowPaths": [
+    "2025",
+    "2024",
+    "2023",
+  ],
+}
+`;

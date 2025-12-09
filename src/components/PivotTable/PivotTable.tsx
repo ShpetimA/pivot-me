@@ -17,7 +17,7 @@ const PivotTable = ({ pivotData }: PivotTableProps) => {
       <table className={Styles.pivotTable}>
         <TableHeaders
           columnHierarchy={pivotData.columnTree}
-          rowDimension={"Year"}
+          rowDimension={pivotData.config.rowDimension}
         />
         <tbody>
           {pivotData.rows.map((row) => (
@@ -60,6 +60,11 @@ type PivotFootProps = {
 };
 
 const PivotFoot = ({ pivotData }: PivotFootProps) => {
+  const grandTotal = Object.values(pivotData.totalColumns).reduce(
+    (sum, val) => sum + val,
+    0
+  );
+
   return (
     <tfoot>
       <tr>
@@ -67,7 +72,7 @@ const PivotFoot = ({ pivotData }: PivotFootProps) => {
         {pivotData.columns.map((col) => (
           <td key={col}>{formatAmount(pivotData.totalColumns[col])}</td>
         ))}
-        <td></td>
+        <td className={Styles.rowTotal}>{formatAmount(grandTotal)}</td>
       </tr>
     </tfoot>
   );
