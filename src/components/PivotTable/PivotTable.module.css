@@ -1,0 +1,30 @@
+.tableContainer {
+    overflow-x: auto;
+}
+
+.pivotTable table,
+.pivotTable th,
+.pivotTable td {
+    border: 1px solid black;
+}
+
+.pivotTable {
+    border-collapse: collapse;
+}
+
+.pivotTable th {
+    background-color: #f2f2f2;
+    padding: 8px;
+    text-align: left;
+}
+
+.pivotTable td {
+    padding-block: 4px;
+    padding-inline: 8px;
+    text-align: left;
+}
+
+.pivotTable tfoot td {
+    background-color: #e0e0e0;
+    font-weight: bold;
+}

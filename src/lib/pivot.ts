@@ -159,3 +159,14 @@ export const generatePivot = <T extends Transaction>(
     columnTree: buildColumnTree(colPaths),
   };
 };
+
+export function getMaxDepth(hierarchy: ColumnNode[]): number {
+  if (!hierarchy || hierarchy.length === 0) return 0;
+  let maxDepth = 1;
+  hierarchy.forEach((node) => {
+    if (node.children) {
+      maxDepth = Math.max(maxDepth, 1 + getMaxDepth(node.children));
+    }
+  });
+  return maxDepth;
+}

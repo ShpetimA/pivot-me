@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@hookform/resolvers':
+    specifier: ^5.2.2
+    version: 5.2.2(react-hook-form@7.68.0)
   '@tanstack/react-query':
     specifier: ^5.90.12
     version: 5.90.12(react@19.2.1)
@@ -29,12 +32,18 @@ dependencies:
   react-dom:
     specifier: ^19.2.0
     version: 19.2.1(react@19.2.1)
+  react-hook-form:
+    specifier: ^7.68.0
+    version: 7.68.0(react@19.2.1)
   react-router:
     specifier: ^7.10.1
     version: 7.10.1(react-dom@19.2.1)(react@19.2.1)
   ts-jest:
     specifier: ^29.4.6
     version: 29.4.6(@babel/core@7.28.5)(jest@30.2.0)(typescript@5.9.3)
+  zod:
+    specifier: ^4.1.13
+    version: 4.1.13
 
 devDependencies:
   '@eslint/js':
@@ -775,6 +784,15 @@ packages:
       levn: 0.4.1
     dev: true
 
+  /@hookform/resolvers@5.2.2(react-hook-form@7.68.0):
+    resolution: {integrity: sha512-A/IxlMLShx3KjV/HeTcTfaMxdwy690+L/ZADoeaTltLx+CVuzkeVIPuybK3jrRfw7YZnmdKsVVHAlEPIAEUNlA==}
+    peerDependencies:
+      react-hook-form: ^7.55.0
+    dependencies:
+      '@standard-schema/utils': 0.3.0
+      react-hook-form: 7.68.0(react@19.2.1)
+    dev: false
+
   /@humanfs/core@0.19.1:
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
     engines: {node: '>=18.18.0'}
@@ -1304,6 +1322,10 @@ packages:
     resolution: {integrity: sha512-36/hTbH2uaWuGVERyC6da9YwGWnzUZXuPro/F2LfsdOsLnCojz/iSH8MxUt/FD2S5XBSVPhmArFUXcpCQ2Hkiw==}
     dependencies:
       '@sinonjs/commons': 3.0.1
+
+  /@standard-schema/utils@0.3.0:
+    resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
+    dev: false
 
   /@tanstack/query-core@5.90.12:
     resolution: {integrity: sha512-T1/8t5DhV/SisWjDnaiU2drl6ySvsHj1bHBCWNXd+/T+Hh1cf6JodyEYMd5sgwm+b/mETT4EV3H+zCVczCU5hg==}
@@ -3464,6 +3486,15 @@ packages:
       scheduler: 0.27.0
     dev: false
 
+  /react-hook-form@7.68.0(react@19.2.1):
+    resolution: {integrity: sha512-oNN3fjrZ/Xo40SWlHf1yCjlMK417JxoSJVUXQjGdvdRCU07NTFei1i1f8ApUAts+IVh14e4EdakeLEA+BEAs/Q==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18 || ^19
+    dependencies:
+      react: 19.2.1
+    dev: false
+
   /react-is@17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
     dev: false
@@ -4122,4 +4153,3 @@ packages:
 
   /zod@4.1.13:
     resolution: {integrity: sha512-AvvthqfqrAhNH9dnfmrfKzX5upOdjUVJYFqNSlkmGf64gRaTzlPwz99IHYnVs28qYAybvAlBV+H7pn0saFY4Ig==}
-    dev: true

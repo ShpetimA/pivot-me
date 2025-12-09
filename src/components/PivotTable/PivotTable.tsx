@@ -1,0 +1,69 @@
+import type { PivotData } from "~/lib/pivot";
+import { TableHeaders } from "~/components/PivotTable/PivotHeaders";
+import Styles from "./PivotTable.module.css";
+
+type PivotTableProps = {
+  pivotData: PivotData | null;
+};
+
+const PivotTable = ({ pivotData }: PivotTableProps) => {
+  if (!pivotData) {
+    return <div>No pivot data to display</div>;
+  }
+
+  return (
+    <div className={Styles.tableContainer}>
+      <table className={Styles.pivotTable}>
+        <TableHeaders
+          columnHierarchy={pivotData.columnTree}
+          rowDimension={"year"}
+        />
+        <tbody>
+          {pivotData.rows.map((row) => (
+            <PivotRow key={row} row={row} pivotData={pivotData} />
+          ))}
+        </tbody>
+        <PivotFoot pivotData={pivotData} />
+      </table>
+    </div>
+  );
+};
+
+export default PivotTable;
+
+type PivotRowProps = {
+  row: string;
+  pivotData: PivotData;
+};
+
+const PivotRow = ({ row, pivotData }: PivotRowProps) => {
+  return (
+    <tr>
+      <td>{row}</td>
+      {pivotData.columns.map((col) => (
+        <td key={col}>
+          {pivotData.data[row][col] ? pivotData.data[row][col] : 0}
+        </td>
+      ))}
+      <td style={{ fontWeight: "bold" }}>{pivotData.totalRows[row]}</td>
+    </tr>
+  );
+};
+
+type PivotFootProps = {
+  pivotData: PivotData;
+};
+
+const PivotFoot = ({ pivotData }: PivotFootProps) => {
+  return (
+    <tfoot>
+      <tr>
+        <td>Total</td>
+        {pivotData.columns.map((col) => (
+          <td key={col}>{pivotData.totalColumns[col]}</td>
+        ))}
+        <td></td>
+      </tr>
+    </tfoot>
+  );
+};

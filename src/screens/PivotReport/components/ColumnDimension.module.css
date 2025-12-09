@@ -1,0 +1,22 @@
+.fieldContainer {
+    display: flex;
+    gap: 16px;
+    flex-direction: row;
+}
+
+.fieldContainer select {
+    flex: 1;
+    width: 100%;
+}
+
+.fieldList {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.addDimensionButton {
+    margin-block: 8px;
+    width: 100%;
+}
