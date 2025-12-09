@@ -1,6 +1,7 @@
 import type { PivotData } from "~/lib/pivot";
 import { TableHeaders } from "~/components/PivotTable/PivotHeaders";
 import Styles from "./PivotTable.module.css";
+import { formatAmount } from "~/lib/format";
 
 type PivotTableProps = {
   pivotData: PivotData | null;
@@ -16,7 +17,7 @@ const PivotTable = ({ pivotData }: PivotTableProps) => {
       <table className={Styles.pivotTable}>
         <TableHeaders
           columnHierarchy={pivotData.columnTree}
-          rowDimension={"year"}
+          rowDimension={"Year"}
         />
         <tbody>
           {pivotData.rows.map((row) => (
@@ -42,10 +43,14 @@ const PivotRow = ({ row, pivotData }: PivotRowProps) => {
       <td>{row}</td>
       {pivotData.columns.map((col) => (
         <td key={col}>
-          {pivotData.data[row][col] ? pivotData.data[row][col] : 0}
+          {pivotData.data[row][col]
+            ? formatAmount(pivotData.data[row][col])
+            : formatAmount(0)}
         </td>
       ))}
-      <td style={{ fontWeight: "bold" }}>{pivotData.totalRows[row]}</td>
+      <td className={Styles.rowTotal}>
+        {formatAmount(pivotData.totalRows[row])}
+      </td>
     </tr>
   );
 };
@@ -60,7 +65,7 @@ const PivotFoot = ({ pivotData }: PivotFootProps) => {
       <tr>
         <td>Total</td>
         {pivotData.columns.map((col) => (
-          <td key={col}>{pivotData.totalColumns[col]}</td>
+          <td key={col}>{formatAmount(pivotData.totalColumns[col])}</td>
         ))}
         <td></td>
       </tr>

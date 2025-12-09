@@ -14,17 +14,27 @@
 
 .pivotTable th {
     background-color: #f2f2f2;
-    padding: 8px;
+    padding-block: 8px;
+    padding-inline: 16px;
+    text-align: center;
+}
+
+.pivotTable th[colspan="1"] {
     text-align: left;
 }
 
 .pivotTable td {
     padding-block: 4px;
-    padding-inline: 8px;
+    padding-inline: 16px;
     text-align: left;
 }
 
 .pivotTable tfoot td {
-    background-color: #e0e0e0;
+    background-color: #2463EB;
+    color: white;
+    font-weight: bold;
+}
+
+.rowTotal {
     font-weight: bold;
 }
